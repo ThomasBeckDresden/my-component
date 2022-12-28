@@ -22,6 +22,6 @@ export interface MyComponentProps extends BlockAttributes {
 }
 
 export const MyComponent = ({ message, contentLanguage }: MyComponentProps): ReactElement => {
-  return <div>Hello {message} {contentLanguage}</div>;
+  return <div>Helloha {message} {contentLanguage}</div>;
 };
 
