@@ -14,7 +14,6 @@
 import React, { ReactElement } from "react";
 import { BlockAttributes } from "widget-sdk";
 import { useState } from 'react';
-import ReactDOM from 'react-dom/client';
 
 
 
@@ -27,7 +26,7 @@ export interface MyComponentProps extends BlockAttributes {
   message: string;
 }
 
-export const MyComponent = ({ input, message, contentLanguage }: MyComponentProps): ReactElement => {
+export const MyComponent = ({  }: MyComponentProps): ReactElement => {
   const [eloBefore, seteloBefore] = useState("");
   const [eloOpponent, seteloOpponent] = useState("");
   const [wonBinary, setwonBinary] = useState("");
@@ -38,7 +37,6 @@ export const MyComponent = ({ input, message, contentLanguage }: MyComponentProp
     console.log(eloBefore);
     console.log(eloOpponent);
     console.log(wonBinary);
-   
     let wonYesNo = Number(wonBinary)
     let eloDifference = Number(eloOpponent) - Number(eloBefore);
     let winProbability = 1 / (1 + 10 ^ (eloDifference / 150));
