@@ -13,15 +13,48 @@
 
 import React, { ReactElement } from "react";
 import { BlockAttributes } from "widget-sdk";
+import { useState } from 'react';
+import ReactDOM from 'react-dom/client';
+
+
 
 /**
  * React Component
  */
+
+
 export interface MyComponentProps extends BlockAttributes {
   message: string;
 }
 
-export const MyComponent = ({ message, contentLanguage }: MyComponentProps): ReactElement => {
-  return <div>Hellohahehe {message} {contentLanguage}</div>;
-};
+export const MyComponent = ({ input, message, contentLanguage }: MyComponentProps): ReactElement => {
+  const [eloBefore, seteloBefore] = useState("");
+  const [eloOpponent, seteloOpponent] = useState("");
+  const [wonBinary, setwonBinary] = useState("");
+  const [eloAfter, seteloAfter] = useState(1);
 
+  let calcElo = function (e) {
+    e.preventDefault();
+    console.log(eloBefore);
+    console.log(eloOpponent);
+    console.log(wonBinary);
+   
+    let wonYesNo = Number(wonBinary)
+    let eloDifference = Number(eloOpponent) - Number(eloBefore);
+    let winProbability = 1 / (1 + 10 ^ (eloDifference / 150));
+    let maxChange = 16;
+    let change = (wonYesNo - winProbability) * maxChange;
+    let newElo = Number(eloBefore) + Number(change);
+    seteloAfter(newElo);
+  };
+  return <div><form onSubmit={(e) => calcElo(e)}>
+    <label>eloBefore</label><input id="eloBefore" type="number" name="message" value={eloBefore} onChange={(e) => seteloBefore(e.target.value)} />
+    <label>eloOpponent</label><input id="eloOpponent" type="number" name="message" value={eloOpponent} onChange={(e) => seteloOpponent(e.target.value)} />
+    <label>wonBinary</label><input id="wonBinary" type="number" name="message" value={wonBinary} onChange={(e) => setwonBinary(e.target.value)} />
+
+    <input id="submit" type="submit" />
+    
+  </form>
+    Your new rating is {Number(eloAfter)}
+  </div>
+}
