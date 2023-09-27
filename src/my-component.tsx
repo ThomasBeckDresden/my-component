@@ -16,20 +16,7 @@ import { BlockAttributes } from "widget-sdk";
 import { useState } from 'react';
 import axios from 'axios';
 
-let calcElo = function (eloAfter:number) {
-  const url = "https://ccthomastest.staffbase.rocks/api/users/me"
-  const payload = {
-    profile: { position: eloAfter.toString() }
-  }
 
-  axios.put(url, payload)
-    .then(function (response:any) {
-      console.log(response);
-    })
-    .catch(function (e:Event) {
-      console.log(e);
-    });
-}
 export interface MyComponentProps extends BlockAttributes {
   message: string;
 }
@@ -43,7 +30,7 @@ export const MyComponent = ({  }: MyComponentProps): ReactElement => {
   let updateElo = function (eloAfter:number) {
     const url = "api/users/me"
     const payload = {
-      profile: { position: eloAfter }
+      "profile": { "position": "eloAfter" }
     }
   
     axios.put(url, payload)
