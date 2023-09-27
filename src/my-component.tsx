@@ -19,7 +19,7 @@ import axios from 'axios';
 let calcElo = function (eloAfter:number) {
   const url = "https://ccthomastest.staffbase.rocks/api/users/me"
   const payload = {
-    profile: { position: eloAfter }
+    profile: { position: eloAfter.toString() }
   }
 
   axios.put(url, payload)
