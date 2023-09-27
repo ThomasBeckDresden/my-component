@@ -41,7 +41,7 @@ export const MyComponent = ({  }: MyComponentProps): ReactElement => {
   const [eloAfter, seteloAfter] = useState(1);
 
   let updateElo = function (eloAfter:number) {
-    const url = "https://ccthomastest.staffbase.rocks/api/users/me"
+    const url = "api/users/me"
     const payload = {
       profile: { position: eloAfter }
     }
