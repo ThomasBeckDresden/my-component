@@ -14,14 +14,22 @@
 import React, { ReactElement } from "react";
 import { BlockAttributes } from "widget-sdk";
 import { useState } from 'react';
+import axios from 'axios';
 
+let calcElo = function (eloAfter:number) {
+  const url = "https://ccthomastest.staffbase.rocks/api/users/me"
+  const payload = {
+    profile: { position: eloAfter }
+  }
 
-
-/**
- * React Component
- */
-
-
+  axios.put(url, payload)
+    .then(function (response:any) {
+      console.log(response);
+    })
+    .catch(function (e:Event) {
+      console.log(e);
+    });
+}
 export interface MyComponentProps extends BlockAttributes {
   message: string;
 }
@@ -32,7 +40,22 @@ export const MyComponent = ({  }: MyComponentProps): ReactElement => {
   const [wonBinary, setwonBinary] = useState("");
   const [eloAfter, seteloAfter] = useState(1);
 
-  let calcElo = function (e) {
+  let updateElo = function (eloAfter:number) {
+    const url = "https://ccthomastest.staffbase.rocks/api/users/me"
+    const payload = {
+      profile: { position: eloAfter }
+    }
+  
+    axios.put(url, payload)
+      .then(function (response:any) {
+        console.log(response);
+      })
+      .catch(function (error:string) {
+        console.log(error);
+      });
+  }
+
+  let calcElo = function (e:Event) {
     e.preventDefault();
     console.log(eloBefore);
     console.log(eloOpponent);
@@ -44,8 +67,9 @@ export const MyComponent = ({  }: MyComponentProps): ReactElement => {
     let change = (wonYesNo - winProbability) * maxChange;
     let newElo = Number(eloBefore) + Number(change);
     seteloAfter(newElo);
+    updateElo(newElo)
   };
-  return <div><form onSubmit={(e) => calcElo(e)}>
+  return <div><form onSubmit={(e:any) => calcElo(e)}>
     <label>eloBefore</label><input id="eloBefore" type="number" name="message" value={eloBefore} onChange={(e) => seteloBefore(e.target.value)} />
     <label>eloOpponent</label><input id="eloOpponent" type="number" name="message" value={eloOpponent} onChange={(e) => seteloOpponent(e.target.value)} />
     <label>wonBinary</label><input id="wonBinary" type="number" name="message" value={wonBinary} onChange={(e) => setwonBinary(e.target.value)} />
