@@ -20,6 +20,7 @@
     "@staffbase/widget-sdk": "^3.6.2",
     "axios": "^1.5.1",
     "react": "^16.13.1",
+    "react-cookie": "^6.1.1",
     "react-dom": "^16.13.1",
     "regenerator-runtime": "0.13.7"
   },

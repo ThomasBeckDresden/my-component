@@ -15,7 +15,7 @@ import React, { ReactElement } from "react";
 import { BlockAttributes } from "widget-sdk";
 import { useState } from 'react';
 import axios from 'axios';
-
+import cookieClient from 'react-cookie'
 
 export interface MyComponentProps extends BlockAttributes {
   message: string;
@@ -33,7 +33,7 @@ export const MyComponent = ({  }: MyComponentProps): ReactElement => {
       "profile": { "position": "eloAfter" }
     }
   
-    axios.put(url, payload)
+    axios.put(url, payload,{ withCredentials: true })
       .then(function (response:any) {
         console.log(response);
       })
